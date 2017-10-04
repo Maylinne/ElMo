@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">#555555</item>
+    </style>
+
+    <style name="FireTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#992222</item>
+        <item name="colorPrimaryDark">#551111</item>
+        <item name="colorAccent">#551111</item>
+    </style>
+
+    <style name="Widget.Button.Toggle" parent="android:Widget">
+        <item name="android:background">@drawable/ic_toggle_bg_air</item>
+        <item name="android:disabledAlpha">?android:attr/disabledAlpha</item>
+    </style>
+
+    <style name="toggleButton"  parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:buttonStyleToggle">@style/Widget.Button.Toggle</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="attributes">
+        <item name="android:textColor"> #FFFFFF </item>
+        <item name="android:textStyle"> bold </item>
+    </style>
+
+    <style name="attribute_predef">
+        <item name="android:textColor"> #FFFFFF </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="attribute_predef_text">
+        <item name="android:textColor"> #FFFFFF </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:gravity">right</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="presetting_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:textColor"> #FFFFFF </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+</resources>

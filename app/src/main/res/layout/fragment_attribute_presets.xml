@@ -1,0 +1,164 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.elmo.AttributePresetsFragment">
+
+    <LinearLayout
+        android:background="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/element_IV"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:src="@drawable/e_air_oval"
+            android:layout_gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/randomName_IB"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:src="@drawable/dice"
+                android:visibility="gone"/>
+
+            <EditText
+                style="@style/attributes"
+                android:id="@+id/name_ET"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:text="Monster name"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="60dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/remaining_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/attributes"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/att_TV"
+                    android:text="Attack:"
+                    style="@style/attribute_predef_text"/>
+
+                <Button
+                    android:id="@+id/attackMinus_B"
+                    style="@style/presetting_button"
+                    android:text="-"/>
+
+                <TextView
+                    style="@style/attribute_predef"
+                    android:id="@+id/attack_TV"
+                    android:text="15"/>
+
+                <Button
+                    android:id="@+id/attackPlus_B"
+                    android:text="+"
+                    style="@style/presetting_button"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/attribute_predef_text"
+                    android:text="Defense:"/>
+
+                <Button
+                    android:id="@+id/defenseMinus_B"
+                    style="@style/presetting_button"
+                    android:text="-"/>
+
+                <TextView
+                    style="@style/attribute_predef"
+                    android:id="@+id/defense_TV"
+                    android:text="15"/>
+
+                <Button
+                    android:id="@+id/defensePlus_B"
+                    style="@style/presetting_button"
+                    android:text="+"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/attribute_predef_text"
+                    android:id="@+id/hp_TV"
+                    android:text="Hit points:"/>
+
+                <Button
+                    android:id="@+id/hitPointsMinus_B"
+                    style="@style/presetting_button"
+                    android:text="-"/>
+
+                <TextView
+                    style="@style/attribute_predef"
+                    android:id="@+id/hitPoints_TV"
+                    android:text="15"/>
+
+                <Button
+                    android:id="@+id/hitPointsPlus_B"
+                    style="@style/presetting_button"
+                    android:text="+"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/back_B"
+                style="@style/presetting_button"
+                android:text="Back"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/done_B"
+                style="@style/presetting_button"
+                android:background="@drawable/btn_bg"
+                android:text="Done"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
