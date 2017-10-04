@@ -146,6 +146,7 @@ public class MoncActivity extends AppCompatActivity {
             if(resultCode == RESULT_OK) {
                 monc.setHitPoints(data.getIntExtra("HitPoints", monc.getHitPoints()));
                 monc.setXP(data.getIntExtra("XP", monc.getXP()));
+                monc.setLevel(data.getIntExtra("Level", monc.getLevel()));
                 SetAttributes();
             }
         }
@@ -184,7 +185,7 @@ public class MoncActivity extends AppCompatActivity {
 
         // Find the XP and fill it
         TextView xp = (TextView) findViewById(R.id.xp_TV);
-        xp.setText(String.valueOf(monc.getXP()));
+        xp.setText(String.valueOf(monc.LevelMaxXp()) + " / " + String.valueOf(monc.getXP()));
 
         // Find the level, and set it
         TextView lvl = (TextView) findViewById(R.id.level_TV);

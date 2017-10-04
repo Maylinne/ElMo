@@ -182,7 +182,7 @@ public class Monster implements Parcelable {
 
     public void setXP(int mXP) {
         this.mXP = mXP;
-       // LevelUp();
+        LevelUp();
     }
 
     public void setLevel(int mLevel) {
@@ -297,15 +297,16 @@ public class Monster implements Parcelable {
 
 
     public int LevelMaxXp (){
-        int lmx = this.mLevel ^ 2;
+        int lmx = (int) Math.pow(2, this.mLevel);
         return lmx;
     }
 
     public void LevelUp () {
-        if (mXP >= LevelMaxXp()) {
-            this.setXP(this.getXP() - LevelMaxXp());
-            this.setLevel(this.getLevel() + 1);
-
+        if (this.mXP >= LevelMaxXp()) {
+/*            this.setXP(this.getXP() - LevelMaxXp());
+            this.setLevel(this.getLevel() + 1);*/
+            this.mXP -= LevelMaxXp();
+            this.mLevel++;
         }
     }
 }

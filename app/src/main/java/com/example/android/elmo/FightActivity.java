@@ -81,6 +81,7 @@ public class FightActivity extends AppCompatActivity {
                 Intent mainIntent =  getParentActivityIntent();
                 mainIntent.putExtra("HitPoints", myMonster.getHitPoints());
                 mainIntent.putExtra("XP", myMonster.getXP());
+                mainIntent.putExtra("Level", myMonster.getLevel());
                 setResult(RESULT_OK, mainIntent);
                 finish();
             }
