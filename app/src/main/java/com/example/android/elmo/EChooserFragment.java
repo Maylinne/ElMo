@@ -31,7 +31,6 @@ public class EChooserFragment extends Fragment {
 
         manager = getActivity().getSupportFragmentManager();
 
-
         // Find the View that shows the fire element
         ImageView fire = (ImageView) ecView.findViewById(R.id.fire);
         // Set a click listener on that View
@@ -39,8 +38,7 @@ public class EChooserFragment extends Fragment {
             // The code in this method will be executed when the fire is clicked on.
             @Override
             public void onClick(View view) {
-                act.monc = new FireMonster();
-                UiHelper.FragmentShower(manager, R.id.fragment_container);
+                CreateMonster(new FireMonster());
             }
         });
 
@@ -51,8 +49,7 @@ public class EChooserFragment extends Fragment {
             // The code in this method will be executed when the earth is clicked on.
             @Override
             public void onClick(View view) {
-                act.monc = new EarthMonster();
-                UiHelper.FragmentShower(manager, R.id.fragment_container);
+                CreateMonster(new EarthMonster());
             }
         });
 
@@ -63,8 +60,7 @@ public class EChooserFragment extends Fragment {
             // The code in this method will be executed when the MoncActivity View is clicked on.
             @Override
             public void onClick(View view) {
-                act.monc = new AirMonster();
-                UiHelper.FragmentShower(manager, R.id.fragment_container);
+                CreateMonster(new AirMonster());
             }
         });
 
@@ -75,14 +71,18 @@ public class EChooserFragment extends Fragment {
             // The code in this method will be executed when the water is clicked on.
             @Override
             public void onClick(View view) {
-                act.monc = new WaterMonster();
-                UiHelper.FragmentShower(manager, R.id.fragment_container);
+                CreateMonster(new WaterMonster());
             }
         });
 
         // endregion
 
         return ecView;
+    }
+
+    private void CreateMonster(Monster monster) {
+        StableSingleton.getInstance().addToArray(monster);
+        UiHelper.FragmentShower(manager, R.id.fragment_container);
     }
 
 

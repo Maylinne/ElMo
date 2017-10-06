@@ -35,8 +35,11 @@ public class MoncActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monc);
 
+        monc = StableSingleton.getInstance().getArray().get(0);
+
+
         Intent intent = getIntent();
-        monc = intent.getParcelableExtra("Monster");
+        // monc = intent.getParcelableExtra("Monster");
         toast = Toast.makeText(MoncActivity.this, "", Toast.LENGTH_SHORT);
 
 
@@ -159,9 +162,6 @@ public class MoncActivity extends AppCompatActivity {
 
     // region SetAttributes()
     private void SetAttributes() {
-
-        //
-
 
         // Monster name edit text
         TextView monsterName = (TextView) findViewById(R.id.monsterName_TV);

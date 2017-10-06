@@ -25,7 +25,7 @@ public class FightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight);
 
-        myMonster = getIntent().getParcelableExtra("PlayerMonster");
+        myMonster = StableSingleton.getInstance().getArray().get(0);
         enemyMonster = FightHelper.GetRandomEnemy();
         final Button endButton = (Button) findViewById(R.id.fightEnd_B);
         UiHelper.SetButtonVisibility(endButton, View.GONE);

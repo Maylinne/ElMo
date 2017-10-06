@@ -30,5 +30,12 @@ public class Constants {
     public static final int ENEMYHITPOINTS = 3;
 
 
+    // Attributes
+    public static final int ATTACK = 1;
+    public static final int DEFENSE = 2;
+    public static final int HITPOINTS = 3;
+
+
+
 
 }
