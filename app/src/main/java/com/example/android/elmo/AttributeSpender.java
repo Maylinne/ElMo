@@ -51,28 +51,37 @@ public class AttributeSpender {
 
     // region Methods
 
-    public void IncreaseAttribute (int attr, int incr) {
-        if (mRemainingPoints > incr) {
+    public int IncreaseAttribute (int attr, int incr) {
+        int result = 0;
+        if (mRemainingPoints >= incr) {
             switch (attr) {
                 case Constants.ATTACK:
                     if (mAttack + incr >= 0) {
                         mAttack += incr;
                         mRemainingPoints -= incr;
-                    }
+
+                    } break;
                 case Constants.DEFENSE:
                     if (mDefense + incr >= 0) {
                         mDefense += incr;
                         mRemainingPoints -= incr;
-                    }
+
+                    } break;
                 case Constants.HITPOINTS:
                     if (mHitPoints + incr >= 0) {
                         mHitPoints += incr;
                         mRemainingPoints -= incr;
-                    }
-                default: // ToDo Exception or notification
 
+                    } break;
+                default:// ToDo Exception or notification
+                    result = -1;
+                    break;
             }
+
+        } else {
+            result = -1;
         }
+        return result;
     }
 
     // endregion

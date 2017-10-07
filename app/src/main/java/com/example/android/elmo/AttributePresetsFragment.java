@@ -24,11 +24,22 @@ public class AttributePresetsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    MainActivity act = null;
-    //Attribute changer variables
-    int a = 0;
-    int d = 0;
-    int h = 0;
+    Monster monc = null;
+    AttributeSpender spender = null;
+    // Attribute setter buttons
+    Button aplus = null;
+    Button aminus = null;
+    Button dplus = null;
+    Button dminus = null;
+    Button hplus = null;
+    Button hminus = null;
+
+    // Attribute amounts
+    TextView atv = null;
+    TextView dtv = null;
+    TextView htv = null;
+    TextView remPoints = null;
+
     // Create one global toast to use it for all the toasts in the fragment,
     // to avoid the OutOfMemory caused by too many toasts.
     Toast toast = null;
@@ -37,7 +48,11 @@ public class AttributePresetsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        act = (MainActivity) this.getActivity();
+        monc = StableSingleton.getInstance().getArray().get(0);
+
+        // Get the monster's remaining points. For now there is only one monster (pos 0).
+        // ToDo Parameterize the fragment with the position of the monster, or the ID.
+        spender = new AttributeSpender(monc.getRemainingPoints());
 
 
         // Inflate the layout for this fragment
@@ -46,177 +61,93 @@ public class AttributePresetsFragment extends Fragment {
         toast = Toast.makeText(apfView.getContext(), "", Toast.LENGTH_SHORT);
         ImageView eiv = (ImageView) apfView.findViewById(R.id.element_IV);
         final EditText mnet = (EditText) apfView.findViewById(R.id.name_ET);
-        final TextView remPoints = (TextView) apfView.findViewById(R.id.remaining_points);
-        final TextView atv = (TextView) apfView.findViewById(R.id.attack_TV);
-        final TextView dtv = (TextView) apfView.findViewById(R.id.defense_TV);
-        final TextView htv = (TextView) apfView.findViewById(R.id.hitPoints_TV);
-        SetViews(eiv, mnet, remPoints, atv, dtv, htv);
+        remPoints = (TextView) apfView.findViewById(R.id.remaining_points);
+        atv = (TextView) apfView.findViewById(R.id.attack_TV);
+        dtv = (TextView) apfView.findViewById(R.id.defense_TV);
+        htv = (TextView) apfView.findViewById(R.id.hitPoints_TV);
+        SetImages(eiv, mnet);
+        SetAttributes();
 
-
-
-        /*
-        // region Attack buttons
-
+        // Create buttons
         // Find the View that shows the ATTACK +
-        final Button aplus = (Button) apfView.findViewById(R.id.attackPlus_B);
+        aplus = (Button) apfView.findViewById(R.id.attackPlus_B);
         // Find the View that shows the ATTACK -
-        final Button aminus = (Button) apfView.findViewById(R.id.attackMinus_B);
-        SetButtonVisibility(aminus, View.INVISIBLE);
+        aminus = (Button) apfView.findViewById(R.id.attackMinus_B);
+        // Find the View that shows the DEFENSE +
+        dplus = (Button) apfView.findViewById(R.id.defensePlus_B);
+        // Find the View that shows the DEFENSE -
+        dminus = (Button) apfView.findViewById(R.id.defenseMinus_B);
+        // Find the View that shows the HP +
+        hplus = (Button) apfView.findViewById(R.id.hitPointsPlus_B);
+        // Find the View that shows the HP -
+        hminus = (Button) apfView.findViewById(R.id.hitPointsMinus_B);
+        RefreshVisibility();
 
+        // Bind buttons click
 
-        // Set a click listener on ATTACK + View
+        // Attack buttons
+        // Attack plus
         aplus.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the attack plus button is clicked on.
             @Override
             public void onClick(View view) {
-                if (act.monc.getRemainingPoints() <= 0){
-                    Toast toast = Toast.makeText(apfView.getContext(), "You cannot spend more than " + act.monc.getRemainingPoints() + " points.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    SetButtonVisibility(aplus, View.INVISIBLE);
-                } else {
-                    if (!aminus.isEnabled()) {
-                        SetButtonVisibility(aminus, View.VISIBLE);
-                    }
-                    a ++;
-                    act.monc.setRemainingPoints(act.monc.getRemainingPoints() - 1);
-                    atv.setText(String.valueOf(act.monc.getAttack() + a));
-                    remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-                }
+                AttributeIncreaser(1, Constants.ATTACK);
+
             }
         });
 
-
-        // Set a click listener on ATTACK - View
+        // Attack minus
         aminus.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the attack plus button is clicked on.
             @Override
             public void onClick(View view) {
+                AttributeIncreaser(-1, Constants.ATTACK);
 
-                if (a <= 0) {
-                    Toast toast = Toast.makeText(apfView.getContext(), "The added value cannot be less than 0.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    SetButtonVisibility(aminus, View.INVISIBLE);
-                } else {
-                if (!aplus.isEnabled()){
-                    SetButtonVisibility(aplus, View.VISIBLE);
-                }
-                    a --;
-                    act.monc.setRemainingPoints(act.monc.getRemainingPoints() + 1);
-                    atv.setText(String.valueOf(act.monc.getAttack() + a));
-                    remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-                }
             }
         });
 
-        // endregion
-
-        // region Defense buttons
-
-        // Find the View that shows the DEFENSE +
-        final Button dplus = (Button) apfView.findViewById(R.id.defensePlus_B);
-        // Find the View that shows the DEFENSE -
-        final Button dminus = (Button) apfView.findViewById(R.id.defenseMinus_B);
-        SetButtonVisibility(dminus, View.INVISIBLE);
-
-        // Set a click listener on DEFENSE + View
+        //Defense buttons
+        // Defense plus
         dplus.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the attack plus button is clicked on.
             @Override
             public void onClick(View view) {
-                if (SumIsMore()){
-                    Toast toast = Toast.makeText(apfView.getContext(), "You cannot spend more than " + act.monc.getRemainingPoints() + " points.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    SetButtonVisibility(dplus, View.INVISIBLE);
-                } else {
-                    if (!dminus.isEnabled()) {
-                        SetButtonVisibility(dminus, View.VISIBLE);
-                    }
-                    d ++;
-                    act.monc.setRemainingPoints(act.monc.getRemainingPoints() - 1);
-                    dtv.setText(String.valueOf(act.monc.getDefense() + d ));
-                    remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-                }
+                AttributeIncreaser(1, Constants.DEFENSE);
+
             }
         });
 
-
-        // Set a click listener on DEFENSE - View
+        // Defense minus
         dminus.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the attack plus button is clicked on.
             @Override
             public void onClick(View view) {
+                AttributeIncreaser(-1, Constants.DEFENSE);
 
-                if (d <= 0) {
-                    Toast toast = Toast.makeText(apfView.getContext(), "The added value cannot be less than 0.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    SetButtonVisibility(dminus, View.INVISIBLE);
-                } else {
-                    if (!dplus.isEnabled()){
-                        SetButtonVisibility(dplus, View.VISIBLE);
-                    }
-                    d --;
-                    act.monc.setRemainingPoints(act.monc.getRemainingPoints() + 1);
-                    dtv.setText(String.valueOf(act.monc.getDefense() + d ));
-                    remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-                }
             }
         });
 
-        // endregion
-
-        // region HP buttons
-
-        // Find the View that shows the HP +
-        final Button hplus = (Button) apfView.findViewById(R.id.hitPointsPlus_B);
-        // Find the View that shows the HP -
-        final Button hminus = (Button) apfView.findViewById(R.id.hitPointsMinus_B);
-        SetButtonVisibility(hminus, View.INVISIBLE);
-
-        // Set a click listener on HP + View
+        // HP buttons
+        // HP plus
         hplus.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the attack plus button is clicked on.
             @Override
             public void onClick(View view) {
-                if (SumIsMore()){
-                    Toast toast = Toast.makeText(apfView.getContext(), "You cannot spend more than " + act.monc.getRemainingPoints() + " points.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    SetButtonVisibility(hplus, View.INVISIBLE);
-                } else {
-                    if (!hminus.isEnabled()) {
-                        SetButtonVisibility(hminus, View.VISIBLE);
-                    }
-                    h ++;
-                    act.monc.setRemainingPoints(act.monc.getRemainingPoints() - 1);
-                    htv.setText(String.valueOf(act.monc.getHitPoints() + h ));
-                    remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-                }
+                AttributeIncreaser(1, Constants.HITPOINTS);
+
             }
         });
 
-
-        // Set a click listener on HP - View
+        // HP minus
         hminus.setOnClickListener(new View.OnClickListener() {
             // The code in this method will be executed when the attack plus button is clicked on.
             @Override
             public void onClick(View view) {
-                if (h <= 0) {
-                    Toast toast = Toast.makeText(apfView.getContext(), "The added value cannot be less than 0.", Toast.LENGTH_SHORT);
-                    toast.show();
-                    SetButtonVisibility(hminus, View.INVISIBLE);
-                } else {
-                    if (!hplus.isEnabled()){
-                        SetButtonVisibility(hplus, View.VISIBLE);
-                    }
-                    h --;
-                    act.monc.setRemainingPoints(act.monc.getRemainingPoints() + 1);
-                    htv.setText(String.valueOf(act.monc.getHitPoints() + h ));
-                    remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-                }
+                AttributeIncreaser(-1, Constants.HITPOINTS);
+
             }
         });
 
-        // endregion
-*/
         // region Random name - not working yet
         /*
         // Find the Random name button
@@ -242,14 +173,13 @@ public class AttributePresetsFragment extends Fragment {
             // The code in this method will be executed when the Done button View is clicked on.
             @Override
             public void onClick(View view) {
-                act.monc.setName(String.valueOf(mnet.getText()));
-                act.monc.setAttack(Integer.parseInt(String.valueOf(atv.getText())));
-                act.monc.setDefense(Integer.parseInt(String.valueOf(dtv.getText())));
-                act.monc.setMaxDefense(Integer.parseInt(String.valueOf(dtv.getText())));
-                act.monc.setHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
-                act.monc.setMaxHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
-                Intent mainIntent = new Intent(act.getApplicationContext(), MoncActivity.class);
-                mainIntent.putExtra("Monster", act.monc);
+                monc.setName(String.valueOf(mnet.getText()));
+                monc.setAttack(Integer.parseInt(String.valueOf(atv.getText())));
+                monc.setDefense(Integer.parseInt(String.valueOf(dtv.getText())));
+                monc.setMaxDefense(Integer.parseInt(String.valueOf(dtv.getText())));
+                monc.setHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
+                monc.setMaxHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
+                Intent mainIntent = new Intent(getActivity(), MoncActivity.class);
                 startActivity(mainIntent);
             }
         });
@@ -258,40 +188,104 @@ public class AttributePresetsFragment extends Fragment {
         return apfView;
     }
 
-    private void SetViews(ImageView eiv, EditText mnet, TextView remPoints, TextView atv, TextView dtv, TextView htv) {
+    @Override
+    public void onResume(){
+        super.onResume();
+        //OnResume Fragment
+        // To prevent the attributes fully respend. The user can spend only once the available points.
+        spender = new AttributeSpender(monc.getRemainingPoints());
+        RefreshVisibility();
+    }
+
+    private void AttributeIncreaser(int dif, int attr) {
+
+        switch (attr) {
+            case Constants.ATTACK:
+                if (spender.IncreaseAttribute(Constants.ATTACK, dif) == 0){
+                    monc.setAttack(monc.getAttack() + dif);
+                    monc.setRemainingPoints(monc.getRemainingPoints() - dif);
+                } else {
+                    toast.cancel();
+                    toast.makeText(getActivity(), "You cannot increase the attack.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case Constants.DEFENSE:
+                if (spender.IncreaseAttribute(Constants.DEFENSE, dif) == 0){
+                    monc.setDefense(monc.getDefense() + dif);
+                    monc.setRemainingPoints(monc.getRemainingPoints() - dif);
+                } else {
+                    toast.cancel();
+                    toast.makeText(getActivity(), "You cannot increase the Defense.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case Constants.HITPOINTS:
+                if (spender.IncreaseAttribute(Constants.HITPOINTS, dif) == 0){
+                    monc.setHitPoints(monc.getHitPoints() + dif);
+                    monc.setRemainingPoints(monc.getRemainingPoints() - dif);
+                } else {
+                    toast.cancel();
+                    toast.makeText(getActivity(), "You cannot increase the HitPoints.", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default: // ToDo Notif or log exception
+        }
+
+        SetAttributes();
+        RefreshVisibility();
+    }
+    // region Helper methods
+
+    private void SetImages(ImageView eiv, EditText mnet) {
         // Show the picture of the element
-        eiv.setImageResource(act.monc.getElementPicture());
+        eiv.setImageResource(monc.getElementPicture());
 
         // Show the monster's name
-        mnet.setText(act.monc.getName());
+        mnet.setText(monc.getName());
+    }
+
+    private void SetAttributes () {
+        // Show the attributes
+        atv.setText(String.valueOf(monc.getAttack()));     // Attack
+        dtv.setText(String.valueOf(monc.getDefense()));    // Defense
+        htv.setText(String.valueOf(monc.getHitPoints()));  // HitPoints
 
         // Show the remaining points
-        remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-
-        // Show the attributes
-        atv.setText(String.valueOf(act.monc.getAttack() + a));     // Attack
-        dtv.setText(String.valueOf(act.monc.getDefense() + d));    // Defense
-        htv.setText(String.valueOf(act.monc.getHitPoints() + h));  // HitPoints
+        remPoints.setText("You have got " + monc.getRemainingPoints() + " left.");
     }
-
-    public boolean SumIsMore () {
-        if (a + d + h >= act.monc.getRemainingPoints()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    // Get the monster's remaining points. For now there is only one monster (pos 0).
-    // ToDo Parameterize the fragment with the position of the monster, or the ID.
-    AttributeSpender spender = new AttributeSpender(StableSingleton.getInstance().getArray().get(0).getRemainingPoints());
-
-    // region Helper methods
 
     // Button binder
 
-    private void ButtonBinder () {}
+    private void RefreshVisibility () {
+
+        if (spender.getmRemainingPoints() == 0) {
+            UiHelper.SetButtonVisibility(aplus, View.INVISIBLE);
+            UiHelper.SetButtonVisibility(dplus, View.INVISIBLE);
+            UiHelper.SetButtonVisibility(hplus, View.INVISIBLE);
+        } else {
+            UiHelper.SetButtonVisibility(aplus, View.VISIBLE);
+            UiHelper.SetButtonVisibility(dplus, View.VISIBLE);
+            UiHelper.SetButtonVisibility(hplus, View.VISIBLE);
+        }
+
+        if (spender.getmAttack() == 0) {
+            UiHelper.SetButtonVisibility(aminus, View.INVISIBLE);
+        } else {
+            UiHelper.SetButtonVisibility(aminus, View.VISIBLE);
+        }
+
+        if (spender.getmDefense() == 0) {
+            UiHelper.SetButtonVisibility(dminus, View.INVISIBLE);
+        } else {
+            UiHelper.SetButtonVisibility(dminus, View.VISIBLE);
+        }
+
+        if (spender.getmHitPoints() == 0) {
+            UiHelper.SetButtonVisibility(hminus, View.INVISIBLE);
+        } else {
+            UiHelper.SetButtonVisibility(hminus, View.VISIBLE);
+        }
+
+    }
 
 
 
