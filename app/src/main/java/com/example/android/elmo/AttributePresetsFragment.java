@@ -13,8 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.android.elmo.UiHelper.SetButtonVisibility;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,43 +44,17 @@ public class AttributePresetsFragment extends Fragment {
         final View apfView = inflater.inflate(R.layout.fragment_attribute_presets, container, false);
 
         toast = Toast.makeText(apfView.getContext(), "", Toast.LENGTH_SHORT);
-
-
-        // Show the picture of the element
         ImageView eiv = (ImageView) apfView.findViewById(R.id.element_IV);
-        eiv.setImageResource(act.monc.getElementPicture());
-
-        // Show the monster's name
         final EditText mnet = (EditText) apfView.findViewById(R.id.name_ET);
-        mnet.setText(act.monc.getName());
-
-        // Show the remaining points
         final TextView remPoints = (TextView) apfView.findViewById(R.id.remaining_points);
-        remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
-
-
-        // Count and show the attributes
-        /*
-        Create 3 changer variables (sum of them <= 5),
-        in the text view show the sum of the attribute and the variable.
-        The plus and minus buttons set the variables accordingly.
-        When DONE hit, add the variables to the attributes,
-        and set the monster's attributes to the new attributes.
-         */
-
-        // Collecting the attributes text views (for later).
-        // Azért nem tettem ki ezt a részt benti helperbe, mert kiesik az apfView
-        // értelmezési körzetéből. Az meg kell.
         final TextView atv = (TextView) apfView.findViewById(R.id.attack_TV);
         final TextView dtv = (TextView) apfView.findViewById(R.id.defense_TV);
         final TextView htv = (TextView) apfView.findViewById(R.id.hitPoints_TV);
+        SetViews(eiv, mnet, remPoints, atv, dtv, htv);
 
 
-        // Show the attributes
-        atv.setText(String.valueOf(act.monc.getAttack() + a));     // Attack
-        dtv.setText(String.valueOf(act.monc.getDefense() + d));    // Defense
-        htv.setText(String.valueOf(act.monc.getHitPoints() + h));  // HitPoints
 
+        /*
         // region Attack buttons
 
         // Find the View that shows the ATTACK +
@@ -244,7 +216,7 @@ public class AttributePresetsFragment extends Fragment {
         });
 
         // endregion
-
+*/
         // region Random name - not working yet
         /*
         // Find the Random name button
@@ -286,6 +258,22 @@ public class AttributePresetsFragment extends Fragment {
         return apfView;
     }
 
+    private void SetViews(ImageView eiv, EditText mnet, TextView remPoints, TextView atv, TextView dtv, TextView htv) {
+        // Show the picture of the element
+        eiv.setImageResource(act.monc.getElementPicture());
+
+        // Show the monster's name
+        mnet.setText(act.monc.getName());
+
+        // Show the remaining points
+        remPoints.setText("You have got " + act.monc.getRemainingPoints() + " left.");
+
+        // Show the attributes
+        atv.setText(String.valueOf(act.monc.getAttack() + a));     // Attack
+        dtv.setText(String.valueOf(act.monc.getDefense() + d));    // Defense
+        htv.setText(String.valueOf(act.monc.getHitPoints() + h));  // HitPoints
+    }
+
     public boolean SumIsMore () {
         if (a + d + h >= act.monc.getRemainingPoints()) {
             return true;
@@ -295,23 +283,17 @@ public class AttributePresetsFragment extends Fragment {
     }
 
 
+    // Get the monster's remaining points. For now there is only one monster (pos 0).
+    // ToDo Parameterize the fragment with the position of the monster, or the ID.
+    AttributeSpender spender = new AttributeSpender(StableSingleton.getInstance().getArray().get(0).getRemainingPoints());
 
-    // region Commented methods (to be modified/reused, etc.)
-    /*
-    public void MinusButton (int var, Button minusButton, Button plusButton, TextView textView) {
-        if (var <= 0) {
-            Toast toast = Toast.makeText(this.getContext(), "The added value cannot be less than 0.", Toast.LENGTH_SHORT);
-            toast.show();
-            HideButton(minusButton);
-        } else {
-            if (!plusButton.isEnabled()){
-                ShowButton(plusButton);
-            }
-            var --;
-            textView.setText(String.valueOf(act.monc.getAttack() + a));
-        }
+    // region Helper methods
 
-    }
-    */
+    // Button binder
+
+    private void ButtonBinder () {}
+
+
+
     // endregion
 }

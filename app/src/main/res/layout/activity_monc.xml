@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,6 +23,7 @@
 
             <ImageView
                 android:id="@+id/monc_picture"
+                android:contentDescription="@string/playerImageDesc"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
@@ -64,7 +64,7 @@
                             style="@style/attributes"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Level:" />
+                            android:text="@string/level" />
 
                         <TextView
                             android:id="@+id/level_TV"
@@ -84,7 +84,7 @@
                             style="@style/attributes"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Attack:" />
+                            android:text="@string/attack" />
 
                         <TextView
                             android:id="@+id/attack_TV"
@@ -104,7 +104,7 @@
                             style="@style/attributes"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Defense:" />
+                            android:text="@string/defense" />
 
                         <TextView
                             android:id="@+id/defense_TV"
@@ -124,7 +124,7 @@
                             style="@style/attributes"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Hit points:" />
+                            android:text="@string/hitPoints" />
 
                         <TextView
                             android:id="@+id/hitPoints_TV"
@@ -144,7 +144,7 @@
                             style="@style/attributes"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
-                            android:text="Experience:" />
+                            android:text="@string/experience" />
 
                         <TextView
                             android:id="@+id/xp_TV"
@@ -175,7 +175,7 @@
                     style="@style/attributes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Please, select a food!" />
+                    android:text="@string/selectFood" />
 
                 <RadioGroup
                     android:id="@+id/toggleGroup"
@@ -239,7 +239,7 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/btn_bg"
-                    android:text="Feed me!" />
+                    android:text="@string/feedMe" />
 
             </LinearLayout>
 
@@ -270,14 +270,13 @@
 
                 <ImageButton
                     android:id="@+id/fight"
+                    android:contentDescription="@string/fightButtonDesc"
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_gravity="center"
-                    android:text="fight!"
                     tools:src="@drawable/fight_btn" />
 
             </LinearLayout>
-
 
         </LinearLayout>
 

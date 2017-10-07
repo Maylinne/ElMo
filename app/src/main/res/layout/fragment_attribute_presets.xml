@@ -12,10 +12,11 @@
         android:padding="16dp">
 
         <ImageView
+            android:contentDescription="@string/elementImageDesc"
             android:id="@+id/element_IV"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:src="@drawable/e_air_oval"
+            tools:src="@drawable/e_air_oval"
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
@@ -25,6 +26,7 @@
 
             <ImageButton
                 android:id="@+id/randomName_IB"
+                android:contentDescription="@string/randomNameDesc"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -37,7 +39,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
-                android:text="Monster name"/>
+                tools:text="Monster name"
+                android:inputType="textCapWords"/>
 
         </LinearLayout>
 
@@ -64,22 +67,22 @@
 
                 <TextView
                     android:id="@+id/att_TV"
-                    android:text="Attack:"
+                    android:text="@string/attack"
                     style="@style/attribute_predef_text"/>
 
                 <Button
                     android:id="@+id/attackMinus_B"
                     style="@style/presetting_button"
-                    android:text="-"/>
+                    android:text="@string/minus"/>
 
                 <TextView
                     style="@style/attribute_predef"
                     android:id="@+id/attack_TV"
-                    android:text="15"/>
+                    tools:text="15"/>
 
                 <Button
                     android:id="@+id/attackPlus_B"
-                    android:text="+"
+                    android:text="@string/plus"
                     style="@style/presetting_button"/>
 
             </LinearLayout>
@@ -91,22 +94,22 @@
 
                 <TextView
                     style="@style/attribute_predef_text"
-                    android:text="Defense:"/>
+                    android:text="@string/defense"/>
 
                 <Button
                     android:id="@+id/defenseMinus_B"
                     style="@style/presetting_button"
-                    android:text="-"/>
+                    android:text="@string/minus"/>
 
                 <TextView
                     style="@style/attribute_predef"
                     android:id="@+id/defense_TV"
-                    android:text="15"/>
+                    tools:text="15"/>
 
                 <Button
                     android:id="@+id/defensePlus_B"
                     style="@style/presetting_button"
-                    android:text="+"/>
+                    android:text="@string/plus"/>
 
             </LinearLayout>
 
@@ -118,22 +121,22 @@
                 <TextView
                     style="@style/attribute_predef_text"
                     android:id="@+id/hp_TV"
-                    android:text="Hit points:"/>
+                    android:text="@string/hitPoints"/>
 
                 <Button
                     android:id="@+id/hitPointsMinus_B"
                     style="@style/presetting_button"
-                    android:text="-"/>
+                    android:text="@string/minus"/>
 
                 <TextView
                     style="@style/attribute_predef"
                     android:id="@+id/hitPoints_TV"
-                    android:text="15"/>
+                    tools:text="15"/>
 
                 <Button
                     android:id="@+id/hitPointsPlus_B"
                     style="@style/presetting_button"
-                    android:text="+"/>
+                    android:text="@string/plus"/>
 
             </LinearLayout>
 
@@ -147,14 +150,14 @@
             <Button
                 android:id="@+id/back_B"
                 style="@style/presetting_button"
-                android:text="Back"
+                android:text="@string/back"
                 android:visibility="gone"/>
 
             <Button
                 android:id="@+id/done_B"
                 style="@style/presetting_button"
                 android:background="@drawable/btn_bg"
-                android:text="Done"/>
+                android:text="@string/done"/>
 
 
         </LinearLayout>

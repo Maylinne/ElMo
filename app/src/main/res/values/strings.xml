@@ -3,4 +3,27 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enemy_picture">Enemey picture</string>
+    <string name="attack">Attack:</string>
+    <string name="defense">Defense:</string>
+    <string name="hitPoints">Hit points:</string>
+    <string name="level">Level:</string>
+    <string name="experience">Experience:</string>
+    <string name="myTurn">My turn</string>
+    <string name="nextTurn">Next turn</string>
+    <string name="playerImageDesc">Player monster image</string>
+    <string name="allElementsDesc">All elements image</string>
+    <string name="selectFood">Please, select a food!</string>
+    <string name="feedMe">Feed me!</string>
+    <string name="fightButtonDesc">Fight!</string>
+    <string name="elementImageDesc">Element image</string>
+    <string name="randomNameDesc">Generate a random name</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="back">Back</string>
+    <string name="done">Done</string>
+    <string name="earthImageDesc">Earth element</string>
+    <string name="airImageDesc">Air element</string>
+    <string name="fireImageDesc">Fire element</string>
+    <string name="waterImageDesc">Water element</string>
 </resources>
