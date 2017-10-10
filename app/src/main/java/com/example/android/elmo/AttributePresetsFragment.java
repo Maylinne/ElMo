@@ -1,7 +1,6 @@
 package com.example.android.elmo;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -83,7 +82,7 @@ public class AttributePresetsFragment extends Fragment {
         hminus = (Button) apfView.findViewById(R.id.hitPointsMinus_B);
         RefreshVisibility();
 
-        // Bind buttons click
+        // region Bind buttons click
 
         // Attack buttons
         // Attack plus
@@ -148,6 +147,8 @@ public class AttributePresetsFragment extends Fragment {
             }
         });
 
+        // endregion
+
         // region Random name - not working yet
         /*
         // Find the Random name button
@@ -179,13 +180,17 @@ public class AttributePresetsFragment extends Fragment {
                 monc.setMaxDefense(Integer.parseInt(String.valueOf(dtv.getText())));
                 monc.setHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
                 monc.setMaxHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
-                Intent mainIntent = new Intent(getActivity(), MoncActivity.class);
-                startActivity(mainIntent);
+                CloseFragment();
+
             }
         });
         // endregion
 
         return apfView;
+    }
+
+    private void CloseFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
     }
 
     @Override
@@ -197,6 +202,7 @@ public class AttributePresetsFragment extends Fragment {
         RefreshVisibility();
     }
 
+    // region Helper methods
     private void AttributeIncreaser(int dif, int attr) {
 
         switch (attr) {
@@ -233,7 +239,6 @@ public class AttributePresetsFragment extends Fragment {
         SetAttributes();
         RefreshVisibility();
     }
-    // region Helper methods
 
     private void SetImages(ImageView eiv, EditText mnet) {
         // Show the picture of the element

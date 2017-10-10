@@ -1,8 +1,5 @@
 package com.example.android.elmo;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,24 +11,6 @@ import java.util.Random;
 public class WaterMonster extends Monster {
 
     public WaterMonster () {}
-    public WaterMonster (Parcel in) {
-        super(in);
-    }
-
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Parcelable.Creator<WaterMonster> CREATOR
-            = new Parcelable.Creator<WaterMonster>() {
-        public WaterMonster createFromParcel(Parcel in) {
-            return new WaterMonster(in);
-        }
-
-        public WaterMonster[] newArray(int size) {
-            return new WaterMonster[size];
-        }
-    };
 
     @Override
     public void setDefaultAttributes() {
@@ -75,5 +54,10 @@ public class WaterMonster extends Monster {
         monsterName.add("Precipe");
 
         return monsterName;
+    }
+
+    @Override
+    public int GetOpponentElement () {
+        return Constants.ELEMENT_AIR;
     }
 }

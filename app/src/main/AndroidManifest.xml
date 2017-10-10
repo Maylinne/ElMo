@@ -21,7 +21,8 @@
             android:name=".MoncActivity"
             android:screenOrientation="sensorPortrait" />
         <activity android:name=".FightActivity"
-            android:parentActivityName=".MoncActivity"></activity>
+            android:parentActivityName=".MoncActivity"
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>

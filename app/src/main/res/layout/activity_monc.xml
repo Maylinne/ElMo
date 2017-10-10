@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,11 +24,11 @@
 
             <ImageView
                 android:id="@+id/monc_picture"
-                android:contentDescription="@string/playerImageDesc"
                 android:layout_width="0dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="3"
+                android:contentDescription="@string/playerImageDesc"
                 android:padding="5dp" />
 
 
@@ -270,10 +271,10 @@
 
                 <ImageButton
                     android:id="@+id/fight"
-                    android:contentDescription="@string/fightButtonDesc"
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_gravity="center"
+                    android:contentDescription="@string/fightButtonDesc"
                     tools:src="@drawable/fight_btn" />
 
             </LinearLayout>

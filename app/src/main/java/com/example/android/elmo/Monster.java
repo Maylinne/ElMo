@@ -1,8 +1,6 @@
 package com.example.android.elmo;
 
 import android.graphics.Color;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,7 +9,7 @@ import java.util.Random;
  * Created by Anasztázia on 2017.09.11..
  */
 
-public class Monster implements Parcelable {
+public class Monster {
 
     // The variables
     public String mName;
@@ -34,61 +32,6 @@ public class Monster implements Parcelable {
     public Monster () {
         this.setDefaultAttributes();
     }
-
-    // Writes the values to the parcel. ORDER SZAMIT!
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(mName);
-        out.writeInt(mElement);
-        out.writeInt(mElementPicture);
-        out.writeInt(mMonsterPicture);
-        out.writeInt(mAttack);
-        out.writeInt(mDefense);
-        out.writeInt(mMaxDefense);
-        out.writeInt(mHitPoints);
-        out.writeInt(mMaxHitPoints);
-        out.writeInt(mHunger);
-        out.writeInt(mXP);
-        out.writeInt(mLevel);
-        out.writeInt(mRemainingPoints);
-        out.writeString(mHungerText);
-        out.writeString(mElementColor);
-    }
-
-    // Reads the values from the parcel. ORDER SZAMIT!
-    public Monster (Parcel in){
-        mName = in.readString();
-        mElement = in.readInt();
-        mElementPicture = in.readInt();
-        mMonsterPicture = in.readInt();
-        mAttack = in.readInt();
-        mDefense = in.readInt();
-        mMaxDefense = in.readInt();
-        mHitPoints = in.readInt();
-        mMaxHitPoints = in.readInt();
-        mHunger = in.readInt();
-        mXP = in.readInt();
-        mLevel = in.readInt();
-        mRemainingPoints = in.readInt();
-        mHungerText = in.readString();
-        mElementColor = in.readString();
-    }
-
-    // Parcelhez kell. NEMPISZKA
-    public int describeContents() {
-        return 0;
-    }
-
-    // Parcel creator. NEMPISZKA
-    public static final Parcelable.Creator<Monster> CREATOR
-            = new Parcelable.Creator<Monster>() {
-        public Monster createFromParcel(Parcel in) {
-            return new Monster(in);
-        }
-
-        public Monster[] newArray(int size) {
-            return new Monster[size];
-        }
-    };
 
 
     // region Getter methods
@@ -279,7 +222,9 @@ public class Monster implements Parcelable {
     }
 
     // Get hit
-    public void GetHit (int attack) {
+    public void GetHit (int attack, int element) {
+        if (this.GetOpponentElement() == element)
+        {attack *= 1.5;}
         if (attack < this.mDefense) {
             this.mDefense -= attack;
         } else {
@@ -308,6 +253,10 @@ public class Monster implements Parcelable {
             this.mXP -= LevelMaxXp();
             this.mLevel++;
         }
+    }
+
+    public int GetOpponentElement () {
+        return 0;
     }
 }
 

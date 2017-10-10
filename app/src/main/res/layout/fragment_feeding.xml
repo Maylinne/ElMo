@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000000"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/attributes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/selectFood" />
+
+    <RadioGroup
+        android:id="@+id/toggleGroup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/Constants.FOOD_CLOUD"
+            style="@style/toggleButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_toggle_bg_air"
+            android:onClick="onToggle"
+            android:tag="2" />
+
+        <ToggleButton
+            android:id="@+id/FOOD_DIRT"
+            style="@style/toggleButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_toggle_bg_earth"
+            android:onClick="onToggle"
+            android:tag="3" />
+
+        <ToggleButton
+            android:id="@+id/FOOD_COAL"
+            style="@style/toggleButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_toggle_bg_fire"
+            android:onClick="onToggle"
+            android:tag="5" />
+
+        <ToggleButton
+            android:id="@+id/FOOD_WATER"
+            style="@style/toggleButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/ic_toggle_bg_water"
+            android:onClick="onToggle"
+            android:tag="7" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/hungry_button"
+            style="@style/attributes"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_bg"
+            android:text="@string/feedMe" />
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/hungerMeter_PB"
+        style="?android:progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pb_bg"
+        android:indeterminate="false"
+        android:max="100"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" />
+
+    <TextView
+        android:id="@+id/hungerText_TV"
+        style="@style/attributes"
+        tools:text="Hunger Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+

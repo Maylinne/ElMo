@@ -133,7 +133,6 @@ public class MoncActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(view.getContext(), FightActivity.class);
-                mainIntent.putExtra("PlayerMonster", monc);
                 startActivityForResult(mainIntent, 1);
 
             }
@@ -143,18 +142,11 @@ public class MoncActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                monc.setHitPoints(data.getIntExtra("HitPoints", monc.getHitPoints()));
-                monc.setXP(data.getIntExtra("XP", monc.getXP()));
-                monc.setLevel(data.getIntExtra("Level", monc.getLevel()));
-                SetAttributes();
-            }
-        }
+    public void onResume(){
+        super.onResume();
+        // To refresh the attributes, when returned
+        SetAttributes();
     }
-
 
     //
     // Helper methods

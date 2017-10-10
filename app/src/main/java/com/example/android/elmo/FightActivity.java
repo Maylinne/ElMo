@@ -1,6 +1,5 @@
 package com.example.android.elmo;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +24,7 @@ public class FightActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fight);
 
+        // ToDo Get the pos of the actual monc from an extra. For now 0, since we get only one monster in stable.
         myMonster = StableSingleton.getInstance().getArray().get(0);
         enemyMonster = FightHelper.GetRandomEnemy();
         final Button endButton = (Button) findViewById(R.id.fightEnd_B);
@@ -41,8 +41,8 @@ public class FightActivity extends AppCompatActivity {
             // The code in this method will be executed when the FEEDING BUTTON is clicked on.
             @Override
             public void onClick(View view) {
-                myMonster.GetHit(enemyMonster.getAttack());
-                enemyMonster.GetHit(myMonster.getAttack());
+                myMonster.GetHit(enemyMonster.getAttack(), enemyMonster.getElement());
+                enemyMonster.GetHit(myMonster.getAttack(), myMonster.getElement());
 
                 // Refresh attributes
                 SetAttributes();
@@ -78,11 +78,8 @@ public class FightActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent mainIntent =  getParentActivityIntent();
-                mainIntent.putExtra("HitPoints", myMonster.getHitPoints());
-                mainIntent.putExtra("XP", myMonster.getXP());
-                mainIntent.putExtra("Level", myMonster.getLevel());
-                setResult(RESULT_OK, mainIntent);
+                myMonster.setDefense(myMonster.getMaxDefense());
+
                 finish();
             }
         });
