@@ -20,13 +20,12 @@
         android:orientation="horizontal">
 
         <ToggleButton
-            android:id="@+id/Constants.FOOD_CLOUD"
+            android:id="@+id/FOOD_CLOUD"
             style="@style/toggleButton"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_air"
-            android:onClick="onToggle"
             android:tag="2" />
 
         <ToggleButton
@@ -36,7 +35,6 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_earth"
-            android:onClick="onToggle"
             android:tag="3" />
 
         <ToggleButton
@@ -46,7 +44,6 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_fire"
-            android:onClick="onToggle"
             android:tag="5" />
 
         <ToggleButton
@@ -56,7 +53,6 @@
             android:layout_height="100dp"
             android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_water"
-            android:onClick="onToggle"
             android:tag="7" />
     </RadioGroup>
 

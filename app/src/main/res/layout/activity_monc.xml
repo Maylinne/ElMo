@@ -1,286 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+    <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#000000">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp">
-
-        <LinearLayout
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_monster"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="0dp">
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
 
-            <ImageView
-                android:id="@+id/monc_picture"
-                android:layout_width="0dp"
-                android:layout_height="140dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="3"
-                android:contentDescription="@string/playerImageDesc"
-                android:padding="5dp" />
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="5"
-                android:orientation="vertical"
-                android:padding="5dp">
-
-                <TextView
-                    android:id="@+id/monsterName_TV"
-                    style="@style/attributes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLength="30"
-                    android:maxLines="1"
-                    android:paddingLeft="5dp"
-                    android:textSize="18sp"
-                    tools:text="Monster name" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/attributes"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/level" />
-
-                        <TextView
-                            android:id="@+id/level_TV"
-                            style="@style/attributes"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            tools:text="LVL" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/attributes"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/attack" />
-
-                        <TextView
-                            android:id="@+id/attack_TV"
-                            style="@style/attributes"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            tools:text="Att" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/attributes"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/defense" />
-
-                        <TextView
-                            android:id="@+id/defense_TV"
-                            style="@style/attributes"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            tools:text="Def" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/attributes"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/hitPoints" />
-
-                        <TextView
-                            android:id="@+id/hitPoints_TV"
-                            style="@style/attributes"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            tools:text="HP" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/attributes"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/experience" />
-
-                        <TextView
-                            android:id="@+id/xp_TV"
-                            style="@style/attributes"
-                            android:layout_width="50dp"
-                            android:layout_height="wrap_content"
-                            tools:text="XP" />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_feeding"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="3"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp">
-
-                <TextView
-                    style="@style/attributes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/selectFood" />
-
-                <RadioGroup
-                    android:id="@+id/toggleGroup"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal">
-
-                    <ToggleButton
-                        android:id="@+id/Constants.FOOD_CLOUD"
-                        style="@style/toggleButton"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/ic_toggle_bg_air"
-                        android:onClick="onToggle"
-                        android:tag="2" />
-
-                    <ToggleButton
-                        android:id="@+id/FOOD_DIRT"
-                        style="@style/toggleButton"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/ic_toggle_bg_earth"
-                        android:onClick="onToggle"
-                        android:tag="3" />
-
-                    <ToggleButton
-                        android:id="@+id/FOOD_COAL"
-                        style="@style/toggleButton"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/ic_toggle_bg_fire"
-                        android:onClick="onToggle"
-                        android:tag="5" />
-
-                    <ToggleButton
-                        android:id="@+id/FOOD_WATER"
-                        style="@style/toggleButton"
-                        android:layout_width="0dp"
-                        android:layout_height="100dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/ic_toggle_bg_water"
-                        android:onClick="onToggle"
-                        android:tag="7" />
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/hungry_button"
-                    style="@style/attributes"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/btn_bg"
-                    android:text="@string/feedMe" />
-
-            </LinearLayout>
-
-
-            <ProgressBar
-                android:id="@+id/hungerMeter_PB"
-                style="?android:progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pb_bg"
-                android:indeterminate="false"
-                android:max="100"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp" />
-
-            <TextView
-                android:id="@+id/hungerText_TV"
-                style="@style/attributes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Hunger Text" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-
-                <ImageButton
-                    android:id="@+id/fight"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/fightButtonDesc"
-                    tools:src="@drawable/fight_btn" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragment_fight_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+

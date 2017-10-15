@@ -29,4 +29,5 @@ public class StableSingleton  {
     public void addToArray(Monster monster) {
         list.add(monster);
     }
+    public void clearArray() {list.removeAll(this.getArray());}
 }

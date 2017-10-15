@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 .registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
                     @Override
                     public void onFragmentStopped(FragmentManager fm, Fragment f) {
-                        super.onFragmentStopped(fm, f);
+                        super.onFragmentDestroyed(fm, f);
                         if ( f instanceof AttributePresetsFragment) {
                             Intent mainIntent = new Intent(MainActivity.this, MoncActivity.class);
                             startActivity(mainIntent);
@@ -53,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, firstFragment).commit();
         }
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        StableSingleton.getInstance().clearArray();
     }
 /*
     @Override
