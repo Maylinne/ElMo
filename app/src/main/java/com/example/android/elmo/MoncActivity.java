@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ public class MoncActivity extends AppCompatActivity {
     TextView hungerText;
     ProgressBar hungerMeter;
     Toast toast = null;
+    AttributePresetsFragment apfFragment = null;
     
 
     @Override
@@ -35,15 +38,17 @@ public class MoncActivity extends AppCompatActivity {
         try {
 
 
-            MonsterFragment fragment1 = new MonsterFragment();
-            FeedingFragment fragment2 = new FeedingFragment();
-            FightButtonFragment fragment3 = new FightButtonFragment();
+            MonsterFragment moncFragment = new MonsterFragment();
+            FeedingFragment feedingFragment = new FeedingFragment();
+            FightButtonFragment fightButtonFragment = new FightButtonFragment();
+            apfFragment = new AttributePresetsFragment(true);
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_monster, fragment1)
-                    .replace(R.id.fragment_feeding, fragment2)
-                    .replace(R.id.fragment_fight_button, fragment3)
+                    .replace(R.id.fragment_monster, moncFragment)
+                    .replace(R.id.fragment_feeding, feedingFragment)
+                    .replace(R.id.fragment_fight_button, fightButtonFragment)
+                    .replace(R.id.fragment_apf, apfFragment)
                     .commit();
 
         } catch (Exception e) {
@@ -51,6 +56,22 @@ public class MoncActivity extends AppCompatActivity {
             System.out.println("Error " + e.getMessage());
 
         }
+
+
+
+        getSupportFragmentManager()
+                .registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentStopped(FragmentManager fm, Fragment f) {
+                        super.onFragmentDestroyed(fm, f);
+                        if ( f instanceof AttributePresetsFragment) {
+                            RefreshView();
+                            HideApf();
+                        }
+                    }
+                }, true);
+
+
 
     }
 
@@ -72,50 +93,33 @@ public class MoncActivity extends AppCompatActivity {
 
         for (Fragment frag : this.getSupportFragmentManager().getFragments()
                 ) {
-            if (frag.isVisible() && frag instanceof IRefreshView) {
+            if (frag!=null && frag.isVisible() && frag instanceof IRefreshView) {
                 ((IRefreshView) frag).SetAttributes();
             }
         }
     }
     
-    
-    
-    /*
-    // region SetAttributes()
-    public void SetAttributes() {
-
-        // Monster name edit text
-        TextView monsterName = (TextView) findViewById(R.id.monsterName_TV);
-        // Fill the EditText with a random elemental monster name
-        monsterName.setText(monc.mName);
-
-        // Find the View that shows the ATTACK
-        TextView attack = (TextView) findViewById(R.id.attack_TV);
-        //Set the view with the corresponding picture
-        attack.setText(String.valueOf(monc.getAttack()));
-
-        // Find the View that shows the DEFENSE
-        TextView defense = (TextView) findViewById(R.id.defense_TV);
-        //Set the view with the corresponding picture
-        defense.setText(String.valueOf(monc.getDefense()));
-
-        // Find the View that shows the HIT POINTS
-        TextView hitPoints = (TextView) findViewById(R.id.hitPoints_TV);
-        //Set the view with the corresponding picture
-        hitPoints.setText(String.valueOf(monc.getHitPoints()));
-
-        // Find the XP and fill it
-        TextView xp = (TextView) findViewById(R.id.xp_TV);
-        xp.setText(String.valueOf(monc.LevelMaxXp()) + " / " + String.valueOf(monc.getXP()));
-
-        // Find the level, and set it
-        TextView lvl = (TextView) findViewById(R.id.level_TV);
-        lvl.setText(String.valueOf(monc.getLevel()));
-
+    public void ShowApf () {
+        findViewById(R.id.fragment_feeding).setVisibility(View.GONE);
+        findViewById(R.id.fragment_fight_button).setVisibility(View.GONE);
+        if (this.apfFragment == null) this.apfFragment = new AttributePresetsFragment(true);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_apf, this.apfFragment).commit();
+        findViewById(R.id.fragment_apf).setVisibility(View.VISIBLE);
 
     }
-    // endregion
-*/
+
+    public void HideApf () {
+        findViewById(R.id.fragment_feeding).setVisibility(View.VISIBLE);
+        findViewById(R.id.fragment_fight_button).setVisibility(View.VISIBLE);
+        findViewById(R.id.fragment_apf).setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+    }
+
+
     // region Countdown timer to the progressBar
 
     public class MyCountDownTimer extends CountDownTimer {

@@ -145,7 +145,9 @@ public class Monster {
         Random r = new Random();
         this.mAttack = r.nextInt(12 - 8) + 8;
         this.mDefense = r.nextInt(12 - 8) + 8;
+        this.mMaxDefense = this.mDefense;
         this.mHitPoints = r.nextInt(12 - 8) + 8;
+        this.mMaxHitPoints = this.mHitPoints;
         this.mHunger = 40;
         this.mName = MonsterNaming();
         this.mLevel = 1;
@@ -252,6 +254,9 @@ public class Monster {
             this.setLevel(this.getLevel() + 1);*/
             this.mXP -= LevelMaxXp();
             this.mLevel++;
+            this.setRemainingPoints(this.getRemainingPoints() + 5);
+            this.mHitPoints = this.mMaxHitPoints;
+
         }
     }
 

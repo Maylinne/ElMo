@@ -19,12 +19,18 @@ import android.widget.Toast;
 public class AttributePresetsFragment extends Fragment {
 
 
+    public AttributePresetsFragment(boolean pHideEI) {
+        this.hideEI = pHideEI;
+    }
+
     public AttributePresetsFragment() {
         // Required empty public constructor
     }
 
+
     Monster monc = null;
     AttributeSpender spender = null;
+    boolean hideEI = false;
     // Attribute setter buttons
     Button aplus = null;
     Button aminus = null;
@@ -42,6 +48,8 @@ public class AttributePresetsFragment extends Fragment {
     // Create one global toast to use it for all the toasts in the fragment,
     // to avoid the OutOfMemory caused by too many toasts.
     Toast toast = null;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +72,7 @@ public class AttributePresetsFragment extends Fragment {
         atv = (TextView) apfView.findViewById(R.id.attack_TV);
         dtv = (TextView) apfView.findViewById(R.id.defense_TV);
         htv = (TextView) apfView.findViewById(R.id.hitPoints_TV);
-        SetImages(eiv, mnet);
+        SetImages(eiv, mnet, hideEI);
         SetAttributes();
 
         // Create buttons
@@ -178,7 +186,6 @@ public class AttributePresetsFragment extends Fragment {
                 monc.setAttack(Integer.parseInt(String.valueOf(atv.getText())));
                 monc.setDefense(Integer.parseInt(String.valueOf(dtv.getText())));
                 monc.setMaxDefense(Integer.parseInt(String.valueOf(dtv.getText())));
-                monc.setHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
                 monc.setMaxHitPoints(Integer.parseInt(String.valueOf(htv.getText())));
                 CloseFragment();
 
@@ -226,7 +233,7 @@ public class AttributePresetsFragment extends Fragment {
                 break;
             case Constants.HITPOINTS:
                 if (spender.IncreaseAttribute(Constants.HITPOINTS, dif) == 0){
-                    monc.setHitPoints(monc.getHitPoints() + dif);
+                    monc.setMaxHitPoints(monc.getMaxHitPoints() + dif);
                     monc.setRemainingPoints(monc.getRemainingPoints() - dif);
                 } else {
                     toast.cancel();
@@ -240,9 +247,14 @@ public class AttributePresetsFragment extends Fragment {
         RefreshVisibility();
     }
 
-    private void SetImages(ImageView eiv, EditText mnet) {
+    private void SetImages(ImageView eiv, EditText mnet, boolean hideElementImage) {
         // Show the picture of the element
+
+        if (!hideElementImage) {
         eiv.setImageResource(monc.getElementPicture());
+        } else {
+            eiv.setVisibility(View.GONE);
+        }
 
         // Show the monster's name
         mnet.setText(monc.getName());
@@ -252,7 +264,7 @@ public class AttributePresetsFragment extends Fragment {
         // Show the attributes
         atv.setText(String.valueOf(monc.getAttack()));     // Attack
         dtv.setText(String.valueOf(monc.getDefense()));    // Defense
-        htv.setText(String.valueOf(monc.getHitPoints()));  // HitPoints
+        htv.setText(String.valueOf(monc.getMaxHitPoints()));  // HitPoints
 
         // Show the remaining points
         remPoints.setText("You have got " + monc.getRemainingPoints() + " left.");

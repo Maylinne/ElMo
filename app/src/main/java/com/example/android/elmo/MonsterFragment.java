@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,11 +30,11 @@ public class MonsterFragment extends Fragment implements IRefreshView {
     TextView hitPoints = null;
     TextView xp = null;
     TextView lvl = null;
+    Button lvlUp = null;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
 
 
         // Inflate the layout for this fragment
@@ -43,7 +44,6 @@ public class MonsterFragment extends Fragment implements IRefreshView {
         manager = getActivity().getSupportFragmentManager();
 
         // region Monster image
-
 
         // Find the View that shows the PICTURE OF THE MONSTER
         ImageView monc_picture = (ImageView) moncView.findViewById(R.id.monc_picture);
@@ -68,11 +68,25 @@ public class MonsterFragment extends Fragment implements IRefreshView {
 
         // endregion
 
+        // region Level UP star
+
+        lvlUp = (Button) moncView.findViewById(R.id.lvlUp);
+
+
+        // Refactor for multiActivity usage
+        lvlUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                act.ShowApf();
+            }
+        });
+
+
+        // endregion
+
         SetAttributes();
 
         return moncView;
-
-
 
     }
 
@@ -95,7 +109,16 @@ public class MonsterFragment extends Fragment implements IRefreshView {
         hitPoints.setText(String.valueOf(act.monc.getHitPoints()));
         xp.setText(String.valueOf(act.monc.LevelMaxXp()) + " / " + String.valueOf(act.monc.getXP()));
         lvl.setText(String.valueOf(act.monc.getLevel()));
+        HasPlusPoints();
+    }
 
+    public void HasPlusPoints () {
+        if (act.monc.getRemainingPoints() > 0 ) {
+            UiHelper.SetButtonVisibility(lvlUp, View.VISIBLE);
+            lvlUp.setText(String.valueOf(act.monc.getRemainingPoints()));
+        } else {
+            UiHelper.SetButtonVisibility(lvlUp, View.GONE);
+        }
     }
 
 }

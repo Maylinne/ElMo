@@ -26,7 +26,7 @@ public class FightActivity extends AppCompatActivity {
 
         // ToDo Get the pos of the actual monc from an extra. For now 0, since we get only one monster in stable.
         myMonster = StableSingleton.getInstance().getArray().get(0);
-        enemyMonster = FightHelper.GetRandomEnemy();
+        enemyMonster = FightHelper.GetRandomEnemy(myMonster.getLevel());
         final Button endButton = (Button) findViewById(R.id.fightEnd_B);
         UiHelper.SetButtonVisibility(endButton, View.GONE);
 
