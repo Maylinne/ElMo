@@ -83,7 +83,8 @@ public class FeedingFragment extends Fragment implements IRefreshView {
                         speach = act.monc.GetAcceptedSpeach();
                         pos = r.nextInt(speach.size());
                         act.toast = Toast.makeText(feedingView.getContext(), speach.get(pos), Toast.LENGTH_SHORT);
-                        act.monc.mHunger += r.nextInt(30 - 15) + 15;
+                        act.monc.mHunger += r.nextInt(30 - 20) + 20;
+                        StableSingleton.getInstance().DecreaseFoodAmount(new Food(foodElement, 1));
                         if (act.monc.mHunger >= 100) {
                             act.monc.Heal();
                             act.monc.mHunger = 0;
@@ -150,4 +151,6 @@ public class FeedingFragment extends Fragment implements IRefreshView {
         hungerMeter.setProgress(act.monc.mHunger);
         hungerText.setText(act.monc.HungerTextSelect());
     }
+
+
 }

@@ -32,7 +32,7 @@ public class MoncActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        monc = StableSingleton.getInstance().getArray().get(0);
+        monc = StableSingleton.getInstance().getMonsterArray().get(0);
         toast = Toast.makeText(MoncActivity.this, "", Toast.LENGTH_SHORT);
 
         try {

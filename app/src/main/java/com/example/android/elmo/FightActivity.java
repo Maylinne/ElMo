@@ -25,7 +25,7 @@ public class FightActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fight);
 
         // ToDo Get the pos of the actual monc from an extra. For now 0, since we get only one monster in stable.
-        myMonster = StableSingleton.getInstance().getArray().get(0);
+        myMonster = StableSingleton.getInstance().getMonsterArray().get(0);
         enemyMonster = FightHelper.GetRandomEnemy(myMonster.getLevel());
         final Button endButton = (Button) findViewById(R.id.fightEnd_B);
         UiHelper.SetButtonVisibility(endButton, View.GONE);
@@ -67,6 +67,7 @@ public class FightActivity extends AppCompatActivity {
                         endButton.setTextColor(Color.GREEN);
                         myMonster.setXP(myMonster.getXP() + enemyMonster.getLevel());
                         UiHelper.SetButtonVisibility(endButton, View.VISIBLE);
+                        FightHelper.Drop(enemyMonster.getLevel());
                     }
                 }
             }
@@ -79,7 +80,6 @@ public class FightActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 myMonster.setDefense(myMonster.getMaxDefense());
-
                 finish();
             }
         });
@@ -164,6 +164,8 @@ public class FightActivity extends AppCompatActivity {
 
     }
     // endregion
+
+
 
 
 }

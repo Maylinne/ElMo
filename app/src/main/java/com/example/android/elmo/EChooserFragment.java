@@ -81,7 +81,7 @@ public class EChooserFragment extends Fragment {
     }
 
     private void CreateMonster(Monster monster) {
-        StableSingleton.getInstance().addToArray(monster);
+        StableSingleton.getInstance().addToMonsterArray(monster);
         UiHelper.FragmentShower(manager, R.id.fragment_container);
     }
 

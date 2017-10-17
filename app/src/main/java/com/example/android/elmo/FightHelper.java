@@ -12,7 +12,6 @@ public class FightHelper {
     // ArrayList for selection of a random enemy monster
     public static ArrayList<String> monsterType = new ArrayList<String>();
 
-
     public static void Init() {
         monsterType.add("com.example.android.elmo.AirMonster");
         monsterType.add("com.example.android.elmo.FireMonster");
@@ -23,7 +22,6 @@ public class FightHelper {
     public static Monster GetRandomEnemy (int level) {
         if (monsterType.size() == 0) {
             Init();
-
         }
 
         Random r = new Random();
@@ -36,6 +34,7 @@ public class FightHelper {
             Monster monster = (Monster) c.newInstance();
             monster.setLevel(level);
 
+            if (level > 1) level--;
 
             // ToDo Rekurziv metodussal megoldani
             int remP = monster.getRemainingPoints() * level;
@@ -50,18 +49,26 @@ public class FightHelper {
 
             monster.setHitPoints(remP + monster.getHitPoints());
 
-
             return monster;
         }
         catch (Exception ex)
         {
             return null;
         }
-
-
     }
 
+    public static void Drop (int enemyLevel) {
 
+        ArrayList<Food> dropList = new ArrayList<Food>();
+        ArrayList<Food> foodList = StableSingleton.getInstance().getFoodArray();
+        Random r = new Random();
 
+        for (int i = 0; i < enemyLevel; i++) {
+            dropList.add(new Food(foodList.get(r.nextInt(foodList.size())).getElement(), r.nextInt(10-5)+5));
+        }
+
+        // Foodlistbe belerakni a droplistet => addToFoodArray túlterhelése ArrayList<Food> parammal
+        StableSingleton.getInstance().addToFoodArray(dropList);
+    }
 
 }

@@ -55,7 +55,7 @@ public class AttributePresetsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        monc = StableSingleton.getInstance().getArray().get(0);
+        monc = StableSingleton.getInstance().getMonsterArray().get(0);
 
         // Get the monster's remaining points. For now there is only one monster (pos 0).
         // ToDo Parameterize the fragment with the position of the monster, or the ID.

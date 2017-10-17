@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 public class StableSingleton  {
 
+    // Private constructor.
     private static StableSingleton mInstance;
-    private ArrayList<Monster> list = null;
 
+    private ArrayList<Monster> monsterList = null;
+    private ArrayList<Food> foodList = null;
+
+    // Public constructor
     public static StableSingleton getInstance() {
         if(mInstance == null)
             mInstance = new StableSingleton();
@@ -19,15 +23,74 @@ public class StableSingleton  {
     }
 
     private StableSingleton() {
-        list = new ArrayList<Monster>();
+        monsterList = new ArrayList<Monster>();
+        foodList = new ArrayList<Food>();
+        InitFood();
     }
+
+    // Initialize foodArray
+    private void InitFood () {
+        this.foodList.add(new Food(Constants.FOOD_CLOUD, 10));
+        this.foodList.add(new Food(Constants.FOOD_COAL, 10));
+        this.foodList.add(new Food(Constants.FOOD_DIRT, 10));
+        this.foodList.add(new Food(Constants.FOOD_WATER, 10));
+    }
+
     // retrieve array from anywhere
-    public ArrayList<Monster> getArray() {
-        return this.list;
+    public ArrayList<Monster> getMonsterArray() {
+        return this.monsterList;
     }
+    public ArrayList<Food> getFoodArray() {
+        return this.foodList;
+    }
+
     //Add element to array
-    public void addToArray(Monster monster) {
-        list.add(monster);
+    public void addToMonsterArray(Monster monster) {
+        monsterList.add(monster);
     }
-    public void clearArray() {list.removeAll(this.getArray());}
+    public void addToFoodArray(ArrayList<Food> dropList) {
+        int dropSize = dropList.size();
+        for (int i = 0; i < dropSize; i++)
+        {
+            addToFoodArray( dropList.get(i));
+        }
+    }
+    public void addToFoodArray (Food food) {
+        ArrayList<Food> foodList = StableSingleton.getInstance().getFoodArray();
+        int size = foodList.size();
+        for (int i = 0; i < size; i++)
+        {
+            if (food.getElement() == foodList.get(i).getElement()) {
+                foodList.get(i).setAmount(foodList.get(i).getAmount() + food.getAmount());
+                return;
+            }
+        }
+        foodList.add(food);
+    }
+
+    // Remove food amount from FoodArray
+    public void DecreaseFoodAmount (Food food) {
+        ArrayList<Food> foodList = StableSingleton.getInstance().getFoodArray();
+        int size = foodList.size();
+        for (int i = 0; i < size; i++)
+        {
+            if (food.getElement() == foodList.get(i).getElement()) {
+                foodList.get(i).setAmount(foodList.get(i).getAmount() - food.getAmount());
+                return;
+            }
+        }
+    }
+
+
+    // Clear the array
+    public void clearAllArrays() {
+        monsterList.removeAll(this.getMonsterArray());
+        foodList.removeAll(this.getFoodArray());
+    }
+    public void clearMonsterArray() {
+        monsterList.removeAll(this.getMonsterArray());
+    }
+    public void clearFoodArray() {
+        foodList.removeAll(this.getFoodArray());
+    }
 }

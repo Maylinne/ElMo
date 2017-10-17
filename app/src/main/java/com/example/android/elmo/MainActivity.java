@@ -58,26 +58,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        StableSingleton.getInstance().clearArray();
-    }
-/*
-    @Override
-    public void onResume(){
-        super.onResume();
-
-            // Create a new Fragment to be placed in the activity layout
-            AttributePresetsFragment firstFragment = new AttributePresetsFragment();
-
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            firstFragment.setArguments(getIntent().getExtras());
-
-            // Add the fragment to the 'fragment_container' FrameLayout
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
+        StableSingleton.getInstance().clearMonsterArray();
     }
 
-*/
 
 }
 
