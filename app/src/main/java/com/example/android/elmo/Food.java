@@ -8,19 +8,26 @@ public class Food {
 
 
     // Attributes
+    private String mName;
     private int mElement;
     private int mAmount;
 
     // Constructor
     public Food () {}
 
-    public Food (int element, int amount) {
-       mElement = element;
+
+    public Food (String name, int element, int amount) {
+        mName = name;
+        mElement = element;
         mAmount = amount;
     }
 
 
     // region Getter methods
+
+    public String getName() {
+        return mName;
+    }
 
     public int getElement() {
         return mElement;
@@ -33,6 +40,10 @@ public class Food {
     // endregion
 
     // region Setter methods
+
+    public void setName(String mName) {
+        this.mName = mName;
+    }
 
     public void setElement(int mElement) {
         this.mElement = mElement;

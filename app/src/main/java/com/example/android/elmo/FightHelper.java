@@ -57,18 +57,21 @@ public class FightHelper {
         }
     }
 
-    public static void Drop (int enemyLevel) {
+    public static ArrayList<Food> Drop (int enemyLevel) {
 
         ArrayList<Food> dropList = new ArrayList<Food>();
         ArrayList<Food> foodList = StableSingleton.getInstance().getFoodArray();
         Random r = new Random();
 
         for (int i = 0; i < enemyLevel; i++) {
-            dropList.add(new Food(foodList.get(r.nextInt(foodList.size())).getElement(), r.nextInt(10-5)+5));
+            Food tempFood = foodList.get(r.nextInt(foodList.size()));
+            dropList.add(new Food(tempFood.getName(), tempFood.getElement(), r.nextInt(10-5)+5));
         }
 
         // Foodlistbe belerakni a droplistet => addToFoodArray túlterhelése ArrayList<Food> parammal
         StableSingleton.getInstance().addToFoodArray(dropList);
+
+        return dropList;
     }
 
 }

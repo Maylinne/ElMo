@@ -30,10 +30,10 @@ public class StableSingleton  {
 
     // Initialize foodArray
     private void InitFood () {
-        this.foodList.add(new Food(Constants.FOOD_CLOUD, 10));
-        this.foodList.add(new Food(Constants.FOOD_COAL, 10));
-        this.foodList.add(new Food(Constants.FOOD_DIRT, 10));
-        this.foodList.add(new Food(Constants.FOOD_WATER, 10));
+        this.foodList.add(new Food("Cloud", Constants.FOOD_CLOUD, 10));
+        this.foodList.add(new Food("Coal" ,Constants.FOOD_COAL, 10));
+        this.foodList.add(new Food("Dirt", Constants.FOOD_DIRT, 10));
+        this.foodList.add(new Food("Water", Constants.FOOD_WATER, 10));
     }
 
     // retrieve array from anywhere
@@ -69,13 +69,13 @@ public class StableSingleton  {
     }
 
     // Remove food amount from FoodArray
-    public void DecreaseFoodAmount (Food food) {
+    public void DecreaseFoodAmount (int element, int dec) {
         ArrayList<Food> foodList = StableSingleton.getInstance().getFoodArray();
         int size = foodList.size();
         for (int i = 0; i < size; i++)
         {
-            if (food.getElement() == foodList.get(i).getElement()) {
-                foodList.get(i).setAmount(foodList.get(i).getAmount() - food.getAmount());
+            if (element == foodList.get(i).getElement()) {
+                foodList.get(i).setAmount(foodList.get(i).getAmount() - dec);
                 return;
             }
         }

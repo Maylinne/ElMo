@@ -1,5 +1,7 @@
 package com.example.android.elmo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import static com.example.android.elmo.Constants.ENEMYDEFENSE;
-import static com.example.android.elmo.Constants.ENEMYHITPOINTS;
-import static com.example.android.elmo.Constants.MYDEFENSE;
-import static com.example.android.elmo.Constants.MYHITPOINTS;
+import java.util.ArrayList;
+
+
 
 public class FightActivity extends AppCompatActivity {
 
@@ -67,7 +69,7 @@ public class FightActivity extends AppCompatActivity {
                         endButton.setTextColor(Color.GREEN);
                         myMonster.setXP(myMonster.getXP() + enemyMonster.getLevel());
                         UiHelper.SetButtonVisibility(endButton, View.VISIBLE);
-                        FightHelper.Drop(enemyMonster.getLevel());
+                        FoodAlert(FightHelper.Drop(enemyMonster.getLevel()));
                     }
                 }
             }
@@ -86,12 +88,43 @@ public class FightActivity extends AppCompatActivity {
 
     }
 
+
+    // An Alert Dialog to inform the user about the type, and amount of the food dropped by the monster
+    private void FoodAlert(ArrayList<Food> foodList) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(FightActivity.this);
+
+        int size = foodList.size();
+        StringBuilder message = new StringBuilder();
+        message.append("The monster dropped ");
+        for (int i = 0; i < size; i++)
+        {
+            message.append(foodList.get(i).getAmount());
+            message.append(" ");
+            message.append(foodList.get(i).getName());
+            message.append("s, ");
+
+        }
+
+        alertDialogBuilder.setMessage(message);
+        alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface arg0, int arg1) {
+               Toast.makeText(FightActivity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+               myMonster.setDefense(myMonster.getMaxDefense());
+               finish();
+           }
+         });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     private void SetOriginalValues() {
         originalValues = new int[4];
-        originalValues [MYDEFENSE] = myMonster.getDefense();
-        originalValues [MYHITPOINTS] = myMonster.getHitPoints();
-        originalValues [ENEMYDEFENSE] = enemyMonster.getDefense();
-        originalValues [ENEMYHITPOINTS] = enemyMonster.getHitPoints();
+        originalValues [Constants.MYDEFENSE] = myMonster.getDefense();
+        originalValues [Constants.MYHITPOINTS] = myMonster.getHitPoints();
+        originalValues [Constants.ENEMYDEFENSE] = enemyMonster.getDefense();
+        originalValues [Constants.ENEMYHITPOINTS] = enemyMonster.getHitPoints();
     }
 
 
@@ -112,14 +145,14 @@ public class FightActivity extends AppCompatActivity {
 
         // Defense
         TextView playerDefense = (TextView) findViewById(R.id.defense_TV);
-        if (myMonster.getDefense() != originalValues[MYDEFENSE]) {
+        if (myMonster.getDefense() != originalValues[Constants.MYDEFENSE]) {
             playerDefense.setTextColor(Color.RED);
         }
             playerDefense.setText(String.valueOf(myMonster.getDefense()));
 
         // Hit points
         TextView playerHP = (TextView) findViewById(R.id.hp_TV);
-        if (myMonster.getHitPoints() != originalValues[MYHITPOINTS]) {
+        if (myMonster.getHitPoints() != originalValues[Constants.MYHITPOINTS]) {
             playerHP.setTextColor(Color.RED);
         }
             playerHP.setText(String.valueOf(myMonster.getHitPoints()));
@@ -145,14 +178,14 @@ public class FightActivity extends AppCompatActivity {
 
         // Defense
         TextView enemyDefense = (TextView) findViewById(R.id.enemyDefense_TV);
-        if (enemyMonster.getDefense() != originalValues[ENEMYDEFENSE]) {
+        if (enemyMonster.getDefense() != originalValues[Constants.ENEMYDEFENSE]) {
             enemyDefense.setTextColor(Color.RED);
         }
         enemyDefense.setText(String.valueOf(enemyMonster.getDefense()));
 
         // Hit points
         TextView enemyHP = (TextView) findViewById(R.id.enemyHP_TV);
-        if (enemyMonster.getHitPoints() != originalValues[ENEMYHITPOINTS]) {
+        if (enemyMonster.getHitPoints() != originalValues[Constants.ENEMYHITPOINTS]) {
             enemyHP.setTextColor(Color.RED);
         }
         enemyHP.setText(String.valueOf(enemyMonster.getHitPoints()));
