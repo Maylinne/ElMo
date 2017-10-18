@@ -12,6 +12,11 @@
         android:layout_height="wrap_content"
         android:text="@string/selectFood" />
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
     <RadioGroup
         android:id="@+id/toggleGroup"
         android:layout_width="fill_parent"
@@ -22,39 +27,29 @@
         <ToggleButton
             android:id="@+id/FOOD_CLOUD"
             style="@style/toggleButton"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_air"
+            android:text=""
             android:tag="2" />
 
         <ToggleButton
             android:id="@+id/FOOD_DIRT"
             style="@style/toggleButton"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_earth"
             android:tag="3" />
 
         <ToggleButton
             android:id="@+id/FOOD_COAL"
             style="@style/toggleButton"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_fire"
             android:tag="5" />
 
         <ToggleButton
             android:id="@+id/FOOD_WATER"
             style="@style/toggleButton"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
             android:background="@drawable/ic_toggle_bg_water"
             android:tag="7" />
     </RadioGroup>
+    </HorizontalScrollView>
 
 
     <LinearLayout
